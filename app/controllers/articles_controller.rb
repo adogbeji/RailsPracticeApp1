@@ -11,6 +11,9 @@ class ArticlesController < ApplicationController
         @article = Article.new
     end
     
+    def edit
+    end
+    
     def create
         @article = Article.new(params.require(:article).permit(:title, :description))
         
@@ -22,5 +25,8 @@ class ArticlesController < ApplicationController
         else
             render 'new'  # Renders enw action template
         end
+    end
+    
+    def update
     end
 end
