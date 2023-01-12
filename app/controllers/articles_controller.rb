@@ -24,12 +24,18 @@ class ArticlesController < ApplicationController
             # redirect_to article_path(@article)  # Original redirect code
             redirect_to @article
         else
-            render 'new'  # Renders enw action template
+            render 'new'  # Renders new action template
         end
     end
     
     def update
         @article = Article.find(params[:id])  # Finds article by ID
-        @article.update(params.require(:article).permit(:title, :description))
+        
+        if @article.update(params.require(:article).permit(:title, :description))
+            flash[:notice] = 'Article was updated successfully!'
+            redirect_to @article
+        else
+            render 'edit'  # Renders edit action template
+        end
     end
 end
